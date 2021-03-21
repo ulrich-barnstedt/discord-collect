@@ -3,7 +3,7 @@ const userFn = require("./user")
 module.exports = (vcs) => {
     return {
         at : Date.now(),
-        channel : vcs.channel.id,
+        channel : vcs.channelID,
         deaf : vcs.deaf,
         guild : vcs.guild.id,
         user : userFn(vcs.member),

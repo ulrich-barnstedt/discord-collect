@@ -1,4 +1,4 @@
-const guildFn = require("./utils/user");
+const guildFn = require("./utils/guild");
 const flatDiff = require("./utils/flatDiff");
 
 module.exports = (oldM, newM) => {

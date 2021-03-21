@@ -1,12 +1,14 @@
 const mongo = require("../utils/db")
 
 module.exports = class {
-    async constructor (client, config) {
-        this.client = client;
-        this.events = config.events.toTrack;
-        this.db = await mongo;
+    constructor (client, config) {
+        (async () => {
+            this.client = client;
+            this.events = config.events.toTrack;
+            this.db = await mongo;
 
-        this.setup();
+            this.setup();
+        })();
     }
 
     setup () {
@@ -17,6 +19,8 @@ module.exports = class {
     }
 
     eventHandler (type, data) {
+        console.log(`[${new Date().toLocaleTimeString()}] ${type}`);
+
         this.db.collection(type).insertOne(data);
     }
 }

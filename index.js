@@ -23,6 +23,9 @@ new class Bot {
     }
 
     setupModules () {
-        this.modules = fs.readdirSync("./modules").map(file => require(`./modules/${file}`)).map(Module => new Module(this.client, config, this.modules));
+        this.modules = fs.readdirSync("./modules", {withFileTypes : true})
+            .filter(file => !file.isDirectory())
+            .map(file => require(`./modules/${file.name}`))
+            .map(Module => new Module(this.client, config, this.modules));
     }
 }(token);
