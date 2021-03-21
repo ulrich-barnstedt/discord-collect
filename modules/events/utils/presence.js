@@ -23,7 +23,6 @@ module.exports = (presence) => {
                 flags : ac.flags.bitfield
             }
         }),
-        clientStatus : presence.clientStatus,
-        status : presence.status
+        clientStatus : presence.clientStatus
     }
 }

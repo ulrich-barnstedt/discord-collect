@@ -13,7 +13,6 @@ module.exports = (vcs) => {
         selfVideo : vcs.selfVideo,
         serverDeaf : vcs.serverDeaf,
         serverMute : vcs.serverMute,
-        speaking : vcs.speaking,
         streaming : vcs.streaming
     }
 }

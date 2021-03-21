@@ -11,10 +11,14 @@ const recurse = (oldObj, newObj) => {
         return diff;
     }
 
+    if (oldObj === null) return;
+    if (newObj === null) return;
+
     for (let key in oldObj) {
         if (key in newObj) {
-            let div = recurse(oldObj[key], newObj[key]);
+            if (key === "at") continue;
 
+            let div = recurse(oldObj[key], newObj[key]);
             if (div !== undefined && Object.keys(div).length !== 0) {
                 diff[key] = div;
             }
