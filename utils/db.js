@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 
-const uri = "mongodb://localhost:27017/";
+const uri = require("../mongo.json");
 const client = new MongoClient(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
