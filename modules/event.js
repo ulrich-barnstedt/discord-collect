@@ -1,4 +1,10 @@
-const mongo = require("../utils/db")
+const mongo = require("../utils/db");
+const io = require("@pm2/io");
+
+const evSec = io.meter({
+    name: 'Discord requests',
+    id: 'app/incoming/volume'
+});
 
 module.exports = class {
     constructor (client, config) {
@@ -20,6 +26,7 @@ module.exports = class {
 
     eventHandler (type, data) {
         console.log(`[${new Date().toLocaleTimeString()}] ${type}`);
+        evSec.mark();
 
         this.db.collection(type).insertOne(data);
     }
