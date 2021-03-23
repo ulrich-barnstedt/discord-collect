@@ -1,9 +1,14 @@
 const mongo = require("../utils/db");
 const io = require("@pm2/io");
 
-const evSec = io.meter({
-    name: 'Discord requests',
-    id: 'app/incoming/volume'
+const minSec = io.meter({
+    name: 'Discord requests 5min',
+    timeframe : 60 * 5
+});
+
+const longSec = io.meter({
+    name: 'Discord requests 30min',
+    timeframe : 60 * 30
 });
 
 module.exports = class {
@@ -26,7 +31,8 @@ module.exports = class {
 
     eventHandler (type, data) {
         console.log(`[${new Date().toLocaleTimeString()}] ${type}`);
-        evSec.mark();
+        minSec.mark();
+        longSec.mark();
 
         this.db.collection(type).insertOne(data);
     }
